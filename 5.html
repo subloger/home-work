@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+
+<body>
+  <!--
+Обязательное задание.
+
+Необходимо скопировать и вставить в данный скрипт все функции из 4 задания.
+Необходимо реализовать функцию:
+mathOperation(arg1, arg2, operation);
+Параметры:
+arg1 - первое число.
+arg2 - второе число.
+operation - строка, которая содержит один символ из: "+", "-", "*", "/".
+Функция mathOperation должна вернуть результат операции, который был передан в
+параметр operation для двух первых аргументов (arg1 и arg2).
+Функция mathOperation должна использовать для вычисления функции из 4 задания.
+
+Примеры вызова функции:
+console.log(mathOperation(5, 3, "+")); // 8
+console.log(mathOperation(5, 3, ":)")); // NaN
+
+Функции mathOperation всегда передаются корректные числа, проверки на NaN,
+Infinity делать не нужно, однако, в случае если был передан некорректный
+аргумент в параметр operation, необходимо вернуть NaN.
+
+Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
+-->
+  <script>
+    "use strict";
+
+    /**
+        * /@description - Функция суммирует два числа.
+        * /@param {number} num_1 - Первое число.
+        * /@param {number} num_2 - Второе число.
+        * /@returns {number} - Резудьтат вычисления.
+        */
+    function getSumma(num_1, num_2) {
+      const resultSumma = num_1 + num_2;
+      return resultSumma;
+    }
+
+    /**
+     * /@description - Функция вычитает из большего числа меньшее.
+     * /@param {number} num_1 - Первое число.
+     * /@param {number} num_2 - Второе число.
+     * /@returns {number} - Резудьтат вычисления.
+     */
+    function getSubstraction(num_1, num_2) {
+      if (num_1 > num_2) {
+        const resultSubstraction = num_1 - num_2;
+        return resultSubstraction;
+      } else {
+        const resultSubstraction = num_2 - num_1;
+        return resultSubstraction;
+      }
+    }
+
+    /**
+     * /@description - Функция умножает первое число на второе.
+     * /@param {number} num_1 - Первое число.
+     * /@param {number} num_2 - Второе число.
+     * /@returns {number} - Резудьтат вычисления.
+     */
+    function getMultiply(num_1, num_2) {
+      const resultMultiply = num_1 * num_2;
+      return resultMultiply;
+    }
+
+    /**
+     * /@description - Функция делит первое число на второе.
+     * /@param {number} num_1 - Первое число.
+     * /@param {number} num_2 - Второе число.
+     * /@returns {number} - Резудьтат вычисления.
+     */
+    function getDivision(num_1, num_2) {
+      const resultDivision = num_1 / num_2;
+      return resultDivision;
+    }
+
+    /**
+     * /@description - Функция вычисляет значения для двух чисел  в зависимости от
+     *                 знака операции.
+     * /@param {number} arg_1 - Первое число.
+     * /@param {number} arg_2 - Второе число.
+     * /@param {string} operation - Знак опрерации.
+     * /@returns {number|NaN} - Резудьтат вычисления.
+     */
+    function mathOperation(arg1, arg2, operation) {
+      switch (operation) {
+        case '+':
+          return getSumma(arg1, arg2);
+        case '-':
+          return getSubstraction(arg1, arg2);
+        case '*':
+          return getMultiply(arg1, arg2);
+        case '/':
+          return getDivision(arg1, arg2);
+        default:
+          return NaN;
+      }
+    }
+
+    console.log(mathOperation(5, 2, '/'));
+    console.log(mathOperation(2, 5, '+'));
+    console.log(mathOperation(3, 4, 'aaa'));
+
+  </script>
+</body>
+
+</html>
