@@ -10,41 +10,119 @@
   <!--
 Обязательное задание.
 
-Необходимо из объекта, который лежит в константе post вывести значения, к
-которым приписан комментарий, в консоль.
+Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
+Необходимо создать функцию-конструктор/класс для поста в социальной сети.
+Названия: `PostES5` для es5 стиля и `PostES6` для es6 стиля.
+Пост должен хранить:
+1. Автора поста (имени достаточно).
+2. Текст поста.
+3. Дату и время последнего изменения поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Каждому экземпляру объекта должен быть доступен метод `edit`, который будет
+менять текст поста.
+
+---
+
+Необходимо создать функцию-конструктор/класс для закрепленного поста в
+социальной сети.
+Названия: `AttachedPostES5` для es5 стиля и `AttachedPostES6` для es6 стиля.
+Закрепленный пост должен наследоваться от обычного поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Закрепленный пост должен иметь свойство `highlighted`, в котором по умолчанию
+будет лежать значение false (это свойство будет обозначать, будет ли наш
+закрепленный пост подсвечен).
+У экземпляров объекта закрепленного поста должен быть метод с названием
+`makeTextHighlighted`, который сделает так, чтобы наш пост стал подсвеченным
+(будет менять свойство `highlighted`).
+
+---
+
+Подсказки:
+1. Задание сложное, советую делать по аналогии с примером на онлайн-занятии.
+2. Обратите внимание что пост хранит "дату и время последнего изменения
+поста", это значит что если пост кто-то изменит (например вызовет какой-то
+метод, который изменит что-то в посте), дата и время последнего изменения
+поста также должна измениться.
+3. Выполняйте все по порядку, не стоит пытаться сделать все сразу, иначе можно
+что-нибудь пропустить.
+4. Если непонятно условие - задайте вопрос.
 -->
   <script>
     "use strict";
 
-    const post = {
-      author: "John", // вывести этот текст
-      postId: 23,
-      comments: [
-        {
-          userId: 10,
-          userName: "Alex",
-          text: "lorem ipsum",
-          rating: {
-            likes: 10,
-            dislikes: 2, // вывести это число
-          },
-        },
-        {
-          userId: 5, // вывести это число
-          userName: "Jane",
-          text: "lorem ipsum 2", // вывести этот текст
-          rating: {
-            likes: 3,
-            dislikes: 1,
-          },
-        },
-      ],
+    /* Задание 1 ======================================================*/
+
+    function PostES5(autor, text, date) {
+      this.autor = autor;
+      this.text = text;
+      this.date = date;
+    }
+
+    PostES5.prototype.edit = function (editText) {
+      this.text = editText;
+      this.date = new Date;
     };
 
-    console.log(post.author);
-    console.log(post.comments[0].rating.dislikes);
-    console.log(post.comments[1].userId);
-    console.log(post.comments[1].text);
+    let post = new PostES5('Mike', 'POST TEXT', new Date);
+    alert(`${post.autor}\n${post.text} - ${post.date}`);
+    post.edit('ANOTHER TEXT');
+    alert(`${post.autor}\n${post.text} - ${post.date}`);
+
+    /* ----------------------------------------*/
+
+    class PostES6 {
+      constructor(autor, text, date) {
+        this.autor = autor;
+        this.text = text;
+        this.date = date;
+      }
+
+      edit(editText) {
+        this.text = editText;
+        this.date = new Date;
+      }
+    }
+
+    let post2 = new PostES6('Tomas', 'POST TEXT', new Date);
+    alert(`${post2.autor}\n${post2.text} - ${post2.date}`);
+    post2.edit('ANOTHER TEXT');
+    alert(`${post2.autor}\n${post2.text} - ${post2.date}`);
+
+    /* Задание 2 =============================================================*/
+
+    function AttachedPostES5(autor, text, highlighted = false) {
+      PostES5.call(this, autor, text);
+      this.highlighted = highlighted;
+    }
+
+    AttachedPostES5.prototype.makeTextHighlighted = function () {
+      this.highlighted = true;
+    };
+
+    let attach = new AttachedPostES5('Mike', 'POST TEXT');
+    alert(`${attach.autor}\n${attach.text}\nПодсветка текста - ${attach.highlighted}`);
+    attach.makeTextHighlighted();
+    alert(`${attach.autor}\n${attach.text}\nПодсветка текста - ${attach.highlighted}`);
+
+    /* --------------------------------------- */
+
+    class AttachedPostES6 extends PostES6 {
+      constructor(autor, text, highlighted = false) {
+        super(autor, text);
+        this.highlighted = highlighted;
+      }
+
+      makeTextHighlighted() {
+        this.highlighted = true;
+      };
+    }
+
+    let attach2 = new AttachedPostES6('Tomas', 'POST TEXT');
+    alert(`${attach2.autor}\n${attach2.text}\nПодсветка текста - ${attach2.highlighted}`);
+    attach2.makeTextHighlighted();
+    alert(`${attach2.autor}\n${attach2.text}\nПодсветка текста - ${attach2.highlighted}`);
   </script>
 </body>
 
